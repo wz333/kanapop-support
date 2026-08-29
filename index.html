@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KanaPop Support</title>
+<style>
+  :root {
+    --paper: #E9E5DB;
+    --card-paper: #F8F4EB;
+    --ink: #1A1533;
+    --pink: #FF3D8A;
+    --blue: #1E44C8;
+    --over: #3A1D78;
+    --on-bright: #201A3C;
+    --text-body: #2A2350;
+    --text-muted: #54506A;
+    --text-faint: #635D7D;
+    --sunken: #DAD4C6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #15122B;
+      --card-paper: #211C40;
+      --ink: #F2EBDC;
+      --pink: #FF5C9E;
+      --blue: #7E9DFF;
+      --over: #4A2A96;
+      --on-bright: #201A3C;
+      --text-body: #E4DECF;
+      --text-muted: #B3ACC0;
+      --text-faint: #8E88A2;
+      --sunken: #0E0B22;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 2.5rem 1.25rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* Riso block: card with ink keyline + offset overprint ghost */
+  .riso-block {
+    position: relative;
+    background: var(--card-paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 18px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    margin-right: 5px;
+    margin-left: 0;
+  }
+  .riso-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: var(--over);
+    transform: translate(5px, 5px);
+    z-index: -1;
+  }
+
+  .header { margin-bottom: 2rem; }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+  }
+
+  /* Decorative watermark kana, like the app's home screen */
+  .watermark {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -2;
+    opacity: 0.04;
+  }
+  .watermark span {
+    position: absolute;
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .riso-block h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .riso-block p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+  }
+
+  a {
+    color: var(--pink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--pink);
+    color: var(--on-bright);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .contact-link:hover {
+    text-decoration: none;
+    transform: scale(0.97);
+  }
+
+  .privacy-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--card-paper);
+    color: var(--ink);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .privacy-link:hover {
+    text-decoration: none;
+    transform: scale(0.97);
+  }
+
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+
+  /* Registration marks — riso print detail */
+  .reg-mark {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+  .reg-mark::before, .reg-mark::after {
+    content: '';
+    position: absolute;
+  }
+  .reg-mark::before {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--pink);
+    border-radius: 50%;
+    top: 2px; left: 2px;
+  }
+  .reg-mark::after {
+    width: 8px; height: 1.5px;
+    background: var(--pink);
+    top: 9.25px; left: 6px;
+  }
+</style>
+</head>
+<body>
+  <div class="watermark" aria-hidden="true">
+    <span style="top:5%;left:8%;transform:rotate(-12deg)">あ</span>
+    <span style="top:15%;right:12%;transform:rotate(8deg)">カ</span>
+    <span style="top:45%;left:5%;transform:rotate(-5deg)">き</span>
+    <span style="top:60%;right:8%;transform:rotate(15deg)">シ</span>
+    <span style="top:80%;left:15%;transform:rotate(-8deg)">む</span>
+    <span style="top:30%;right:25%;transform:rotate(3deg)">ト</span>
+    <span style="top:72%;right:20%;transform:rotate(-10deg)">え</span>
+  </div>
+
+  <div class="header">
+    <h1><span class="reg-mark"></span>KanaPop</h1>
+    <p class="subtitle">Learn Japanese kana through fast pattern matching</p>
+  </div>
+
+  <div class="riso-block">
+    <h2>Support</h2>
+    <p>Having trouble or have a suggestion? Reach out and we will get back to you.</p>
+    <a class="contact-link" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>
+  </div>
+
+  <div class="riso-block">
+    <h2>Privacy Policy</h2>
+    <p>Read our full privacy policy to understand how KanaPop handles your data.</p>
+    <a class="privacy-link" href="privacy.html">View Privacy Policy &rarr;</a>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 KanaPop</p>
+  </div>
+</body>
+</html>
