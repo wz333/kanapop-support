@@ -106,4 +106,4 @@ EOF
 git -C "$root" add android/releases.json
 git -C "$root" commit -q -m "Android $version_name ($version_code) APK"
 git -C "$root" push -q
-echo "Done: https://wz333.app/kanapop-support/android.html"
+echo "Done: https://wz333.app/kanapop-support/android"
