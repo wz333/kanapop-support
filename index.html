@@ -144,11 +144,26 @@
     font-size: 0.9rem;
     transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  /* Three pills that wrap onto a second line on a narrow phone. */
-  .store-links {
+  /* One track per platform: side by side when there is room, stacked on
+     a phone, each with its buttons in a column. */
+  .tracks {
     display: flex;
     flex-wrap: wrap;
-    gap: 0 0.6rem;
+    gap: 1.25rem 2rem;
+    margin-top: 0.25rem;
+  }
+  .track {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 1 12rem;
+  }
+  .track h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .privacy-link:hover {
@@ -213,11 +228,16 @@
 
   <div class="riso-block">
     <h2>Get KanaPop</h2>
-    <p>On iPhone and Android. No Google Play on your phone? Download the APK instead.</p>
-    <div class="store-links">
-      <a class="privacy-link" href="https://apps.apple.com/app/kana-pop/id6806635652">App Store &rarr;</a>
-      <a class="privacy-link" href="https://play.google.com/store/apps/details?id=com.wz333.kanapop">Google Play &rarr;</a>
-      <a class="privacy-link" href="android">Android APK &rarr;</a>
+    <div class="tracks">
+      <div class="track">
+        <h3>iPhone &amp; iPad</h3>
+        <a class="privacy-link" href="https://apps.apple.com/app/kana-pop/id6806635652">App Store &rarr;</a>
+      </div>
+      <div class="track">
+        <h3>Android</h3>
+        <a class="privacy-link" href="https://play.google.com/store/apps/details?id=com.wz333.kanapop">Google Play &rarr;</a>
+        <a class="privacy-link" href="android">APK, no Play needed &rarr;</a>
+      </div>
     </div>
   </div>
 
