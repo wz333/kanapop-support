@@ -144,26 +144,44 @@
     font-size: 0.9rem;
     transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  /* One track per platform: side by side when there is room, stacked on
-     a phone, each with its buttons in a column. */
-  .tracks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 2rem;
-    margin-top: 0.25rem;
+  /* Two equal store buttons, one per platform, printed in ink like the
+     app's stamps. The APK sits under them as a plain link: it is the way
+     in for a few, not a third choice for everyone. */
+  .stores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
   }
-  .track {
+  .store {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    flex: 1 1 12rem;
+    padding: 0.6rem 0.8rem 0.7rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 14px;
+    line-height: 1.25;
+    transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  .track h3 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+  .store:hover {
+    text-decoration: none;
+    transform: scale(0.97);
+  }
+  .store small {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.75;
+  }
+  .store span {
+    font-size: 1.05rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .apk-note {
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
   }
 
   .privacy-link:hover {
@@ -228,17 +246,18 @@
 
   <div class="riso-block">
     <h2>Get KanaPop</h2>
-    <div class="tracks">
-      <div class="track">
-        <h3>iPhone &amp; iPad</h3>
-        <a class="privacy-link" href="https://apps.apple.com/app/kana-pop/id6806635652">App Store &rarr;</a>
-      </div>
-      <div class="track">
-        <h3>Android</h3>
-        <a class="privacy-link" href="https://play.google.com/store/apps/details?id=com.wz333.kanapop">Google Play &rarr;</a>
-        <a class="privacy-link" href="android">APK, no Play needed &rarr;</a>
-      </div>
+    <p>Free on iPhone, iPad and Android.</p>
+    <div class="stores">
+      <a class="store" href="https://apps.apple.com/app/kana-pop/id6806635652">
+        <small>iPhone &amp; iPad</small>
+        <span>App Store</span>
+      </a>
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.wz333.kanapop">
+        <small>Android</small>
+        <span>Google Play</span>
+      </a>
     </div>
+    <p class="apk-note">No Google Play on your phone? <a href="android">Download the APK &rarr;</a></p>
   </div>
 
   <div class="riso-block">
