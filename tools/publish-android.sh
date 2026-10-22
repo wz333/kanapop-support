@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Publishes one Play-signed KanaPop APK to android.html.
 #
-#   tools/publish-android.sh ~/Downloads/<the universal APK>.apk
+#   tools/publish-android.sh ~/Downloads/<the universal APK>.apk [YYYY-MM-DD]
+#
+# The date is when that version came out, and defaults to today; pass it when
+# publishing an older version after a newer one. The page lists versions by
+# versionCode, newest first, whatever order they were published in.
 #
 # The APK is the one Google Play signs: Play Console → the app → App bundle
 # explorer → the version → Downloads → "Signed, universal APK". Not one built
@@ -20,7 +24,9 @@ PACKAGE=com.wz333.kanapop
 # it was not signed by Play.
 UPLOAD_CERT=2B:4F:0B:8A:0A:16:05:84:01:98:A2:22:68:CF:4C:31:7B:D7:EC:F0:C9:F2:56:C6:76:1E:F8:EF:23:98:0E:21
 
-apk=${1:?usage: tools/publish-android.sh path/to/universal.apk}
+apk=${1:?usage: tools/publish-android.sh path/to/universal.apk [YYYY-MM-DD]}
+date=${2:-$(date +%F)}
+[[ $date =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || { echo "date must be YYYY-MM-DD: $date" >&2; exit 1; }
 [[ -f $apk ]] || { echo "no such file: $apk" >&2; exit 1; }
 
 root=$(cd "$(dirname "$0")/.." && pwd)
@@ -70,24 +76,28 @@ cp "$apk" "$tmp/$asset"
 sha=$(shasum -a 256 "$tmp/$asset" | cut -d' ' -f1)
 size=$(stat -f %z "$tmp/$asset")
 url=https://github.com/$REPO/releases/download/$tag/$asset
+# An older version published late must not become GitHub's "Latest" release.
+newest=$(python3 -c 'import json,sys; print(max([r["versionCode"] for r in json.load(open(sys.argv[1]))["releases"]] or [0]))' "$data")
+latest_flag=--latest
+(( version_code > newest )) || latest_flag=--latest=false
 
 echo "Publishing KanaPop $version_name ($version_code) for Android, $size bytes"
-gh release create "$tag" "$tmp/$asset" --repo "$REPO" \
+gh release create "$tag" "$tmp/$asset" --repo "$REPO" "$latest_flag" \
   --title "KanaPop $version_name for Android" \
   --notes "Signed universal APK from Google Play. versionCode $version_code.
 
 SHA-256: \`$sha\`"
 
-python3 - "$data" "$cert" "$version_name" "$version_code" "$size" "$sha" "$url" <<'EOF'
-import json, sys, datetime
-path, cert, name, code, size, sha, url = sys.argv[1:]
+python3 - "$data" "$cert" "$version_name" "$version_code" "$size" "$sha" "$url" "$date" <<'EOF'
+import json, sys
+path, cert, name, code, size, sha, url, date = sys.argv[1:]
 data = json.load(open(path))
 data["signingCertSha256"] = cert
-data["releases"].insert(0, {
-    "versionName": name, "versionCode": int(code),
-    "date": datetime.date.today().isoformat(),
+data["releases"].append({
+    "versionName": name, "versionCode": int(code), "date": date,
     "sizeBytes": int(size), "sha256": sha, "url": url,
 })
+data["releases"].sort(key=lambda r: r["versionCode"], reverse=True)
 with open(path, "w") as f:
     json.dump(data, f, indent=2, ensure_ascii=False)
     f.write("\n")
