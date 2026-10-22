@@ -1,4 +1,13 @@
 {
-  "signingCertSha256": null,
-  "releases": []
+  "signingCertSha256": "AC:E9:48:AF:55:48:91:42:35:7C:AD:3D:14:06:E0:EB:E6:90:20:74:94:3F:39:30:B1:E1:1F:85:9F:68:12:D2",
+  "releases": [
+    {
+      "versionName": "1.5",
+      "versionCode": 11,
+      "date": "2026-10-22",
+      "sizeBytes": 4710524,
+      "sha256": "29b4b2ee8141dc386179fb81fa4277b2e07ef770d597558a52d6a8e0ad890d8d",
+      "url": "https://github.com/wz333/kanapop-support/releases/download/android-v1.5/KanaPop-1.5.apk"
+    }
+  ]
 }
