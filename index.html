@@ -240,47 +240,97 @@
     <span style="top:72%;right:20%;transform:rotate(-10deg)">え</span>
   </div>
 
+  <div class="topbar end"><div data-lang-switch></div></div>
+
   <div class="header">
     <h1><span class="reg-mark"></span>KanaPop</h1>
-    <p class="subtitle">Learn Japanese kana through fast pattern matching</p>
+    <p class="subtitle" data-i18n="subtitle">Learn Japanese kana through fast pattern matching</p>
   </div>
 
   <div class="riso-block">
-    <h2>Support</h2>
-    <p>Having trouble or have a suggestion? Reach out and we will get back to you.</p>
+    <h2 data-i18n="supportTitle">Support</h2>
+    <p data-i18n="supportBody">Having trouble or have a suggestion? Reach out and we will get back to you.</p>
     <a class="contact-link" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>
   </div>
 
   <div class="riso-block">
-    <h2>Get KanaPop</h2>
-    <p>Free on iPhone, iPad and Android.</p>
+    <h2 data-i18n="getTitle">Get KanaPop</h2>
+    <p data-i18n="getBody">Free on iPhone, iPad and Android.</p>
     <div class="stores">
       <a class="store" href="https://apps.apple.com/app/kana-pop/id6806635652">
-        <small>iPhone &amp; iPad</small>
+        <small data-i18n="iosLabel">iPhone &amp; iPad</small>
         <span>App Store</span>
       </a>
       <a class="store" href="https://play.google.com/store/apps/details?id=com.wz333.kanapop">
-        <small>Android</small>
+        <small data-i18n="androidLabel">Android</small>
         <span>Google Play</span>
       </a>
     </div>
-    <p class="apk-note">No Google Play on your phone? <a href="android">Download the APK &rarr;</a></p>
+    <p class="apk-note" data-i18n-html="apkNote">No Google Play on your phone? <a href="android">Download the APK &rarr;</a></p>
   </div>
 
   <div class="riso-block">
-    <h2>Privacy Policy</h2>
-    <p>Read our full privacy policy to understand how KanaPop handles your data.</p>
-    <a class="privacy-link" href="privacy.html">View Privacy Policy &rarr;</a>
+    <h2 data-i18n="privacyTitle">Privacy Policy</h2>
+    <p data-i18n="privacyBody">Read our full privacy policy to understand how KanaPop handles your data.</p>
+    <a class="privacy-link" href="privacy.html" data-i18n="privacyLink">View Privacy Policy &rarr;</a>
   </div>
 
   <div class="riso-block">
-    <h2>Buy me a coffee</h2>
-    <p>KanaPop is free. If it helped you learn some kana and you feel like saying thanks, a coffee would make my day &lt;3</p>
-    <a class="contact-link" href="https://ko-fi.com/venusfly96">Buy me a coffee &rarr;</a>
+    <h2 data-i18n="coffeeTitle">Buy me a coffee</h2>
+    <p data-i18n="coffeeBody">KanaPop is free. If it helped you learn some kana and you feel like saying thanks, a coffee would make my day &lt;3</p>
+    <a class="contact-link" href="https://ko-fi.com/venusfly96" data-i18n="coffeeLink">Buy me a coffee &rarr;</a>
   </div>
 
   <div class="footer">
     <p>&copy; 2025 KanaPop</p>
   </div>
+
+<script>
+window.KP_STRINGS = {
+  'en': {
+    pageTitle: 'KanaPop Support',
+    subtitle: 'Learn Japanese kana through fast pattern matching',
+    supportTitle: 'Support',
+    supportBody: 'Having trouble or have a suggestion? Reach out and we will get back to you.',
+    getTitle: 'Get KanaPop',
+    getBody: 'Free on iPhone, iPad and Android.',
+    iosLabel: 'iPhone & iPad',
+    androidLabel: 'Android',
+    apkNote: 'No Google Play on your phone? <a href="android">Download the APK &rarr;</a>',
+    privacyTitle: 'Privacy Policy',
+    privacyBody: 'Read our full privacy policy to understand how KanaPop handles your data.',
+    privacyLink: 'View Privacy Policy \u2192'
+  },
+  'zh-Hans': {
+    pageTitle: 'Kana Pop 支持',
+    subtitle: '通过快速配对学习日语假名',
+    supportTitle: '支持与反馈',
+    supportBody: '遇到问题或有建议？欢迎来信，我们会尽快回复。',
+    getTitle: '获取 Kana Pop',
+    getBody: 'iPhone、iPad 和 Android 均可免费使用。',
+    iosLabel: 'iPhone 和 iPad',
+    androidLabel: 'Android',
+    apkNote: '手机上没有 Google Play？<a href="android">下载 APK &rarr;</a>',
+    privacyTitle: '隐私政策',
+    privacyBody: '阅读完整的隐私政策，了解 Kana Pop 如何处理你的数据。',
+    privacyLink: '查看隐私政策 \u2192'
+  },
+  'zh-Hant': {
+    pageTitle: 'Kana Pop 支援',
+    subtitle: '透過快速配對學習日文假名',
+    supportTitle: '支援與回饋',
+    supportBody: '遇到問題或有建議？歡迎來信，我們會盡快回覆。',
+    getTitle: '取得 Kana Pop',
+    getBody: 'iPhone、iPad 與 Android 皆可免費使用。',
+    iosLabel: 'iPhone 與 iPad',
+    androidLabel: 'Android',
+    apkNote: '手機上沒有 Google Play？<a href="android">下載 APK &rarr;</a>',
+    privacyTitle: '隱私權政策',
+    privacyBody: '閱讀完整的隱私權政策，了解 Kana Pop 如何處理你的資料。',
+    privacyLink: '查看隱私權政策 \u2192'
+  }
+};
+</script>
+<script src="lang.js"></script>
 </body>
 </html>

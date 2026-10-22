@@ -118,6 +118,12 @@
   a { color: var(--pink); text-decoration: none; font-weight: 600; }
   a:hover { text-decoration: underline; }
 
+  .note {
+    font-size: 0.85rem !important;
+    color: var(--text-faint) !important;
+    margin-bottom: 1.25rem !important;
+  }
+
   .contact-pill {
     display: inline-block;
     margin-top: 0.25rem;
@@ -162,11 +168,14 @@
     <span style="top:20%;left:20%;transform:rotate(3deg)">ヌ</span>
   </div>
 
-  <a class="back-link" href="index.html">&larr; Back</a>
-  <h1>Privacy Policy</h1>
-  <p class="date">Effective date: September 3, 2026</p>
+  <div class="topbar">
+    <a class="back-link" href="index.html" data-i18n="back">&larr; Back</a>
+    <div data-lang-switch></div>
+  </div>
+  <h1 data-i18n="title">Privacy Policy</h1>
+  <p class="date" data-i18n="date">Effective date: September 3, 2026</p>
 
-  <div class="policy-block">
+  <div class="policy-block" data-i18n-html="policy">
     <h2>Overview</h2>
     <p>KanaPop is a Japanese kana learning game. Your privacy is important to us. This policy explains what data KanaPop collects and how it is used.</p>
 
@@ -198,5 +207,29 @@
     <p>Questions or concerns about this policy?</p>
     <a class="contact-pill" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>
   </div>
+<script>
+// The English policy is the governing text; the translations say so.
+window.KP_STRINGS = {
+  'en': {
+    pageTitle: 'KanaPop \u2014 Privacy Policy',
+    title: 'Privacy Policy',
+    date: 'Effective date: September 3, 2026',
+    policy: '    <h2>Overview</h2>\n    <p>KanaPop is a Japanese kana learning game. Your privacy is important to us. This policy explains what data KanaPop collects and how it is used.</p>\n\n    <h2>Data Collection</h2>\n    <p>KanaPop\'s own code collects <strong>no</strong> personal data. Specifically:</p>\n    <ul>\n      <li>No account or sign-up is required.</li>\n      <li>No personal information (name, email, etc.) is requested or gathered.</li>\n      <li>No usage analytics or tracking is performed by the app itself.</li>\n      <li>Your game progress, stats, and settings are stored only on your device and are never sent to us.</li>\n    </ul>\n    <p>KanaPop offers optional rewarded ads — watch one to earn an extra life or hint. These ads are served by Google AdMob, which may collect and process advertising-related data on its own behalf. See <strong>Third-Party Services</strong> below for details.</p>\n\n    <h2>Data Stored on Your Device</h2>\n    <p>KanaPop stores your game progress and preferences (such as language setting and sound preferences) locally on your device using standard iOS storage. This data never leaves your device and is not accessible to us.</p>\n\n    <h2>Third-Party Services</h2>\n    <p>KanaPop uses <strong>Google AdMob</strong> to show optional rewarded video ads. Watching an ad is never required to play. To serve and measure these ads, AdMob may collect data such as your device\'s advertising identifier, IP address, and ad interaction data.</p>\n    <p>Before this identifier can be used, KanaPop asks for permission via Apple\'s App Tracking Transparency prompt. Declining it does not block gameplay or ad access — it only limits how personalized the ads are.</p>\n    <p>For details on what Google collects and how it\'s used, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google\'s Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses information from apps that use its services</a>.</p>\n\n    <h2>Children\'s Privacy</h2>\n    <p>KanaPop\'s own code does not collect any personal information from anyone, including children under 13. Ads shown in the app are served by Google AdMob; ad personalization is enabled only with a player\'s explicit permission via the App Tracking Transparency prompt.</p>\n\n    <h2>Changes to This Policy</h2>\n    <p>If we update this privacy policy, the revised version will be posted on this page with an updated effective date.</p>\n\n    <h2>Contact</h2>\n    <p>Questions or concerns about this policy?</p>\n    <a class="contact-pill" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>'
+  },
+  'zh-Hans': {
+    pageTitle: 'Kana Pop 隐私政策',
+    title: '隐私政策',
+    date: '生效日期：2026 年 9 月 3 日',
+    policy: '    <p class="note">本译文仅供参考。如与英文版本有出入，以英文版本为准。</p>\n\n    <h2>概述</h2>\n    <p>Kana Pop 是一款日语假名学习游戏。我们重视你的隐私。本政策说明 Kana Pop 会收集哪些数据，以及这些数据如何被使用。</p>\n\n    <h2>数据收集</h2>\n    <p>Kana Pop 自身的代码<strong>不</strong>收集任何个人数据。具体来说：</p>\n    <ul>\n      <li>无需注册或登录账号。</li>\n      <li>不会索取或收集任何个人信息（姓名、电子邮件等）。</li>\n      <li>应用本身不进行任何使用情况分析或跟踪。</li>\n      <li>你的游戏进度、统计数据和设置只保存在你的设备上，绝不会发送给我们。</li>\n    </ul>\n    <p>Kana Pop 提供可选的激励广告：观看一则广告即可获得额外一条命或一次提示。这些广告由 Google AdMob 提供，AdMob 可能会自行收集和处理与广告相关的数据。详情请见下方的<strong>第三方服务</strong>。</p>\n\n    <h2>保存在你设备上的数据</h2>\n    <p>Kana Pop 使用标准的 iOS 存储，将你的游戏进度和偏好设置（如语言设置和声音设置）保存在你的设备本地。这些数据不会离开你的设备，我们也无法访问。</p>\n\n    <h2>第三方服务</h2>\n    <p>Kana Pop 使用 <strong>Google AdMob</strong> 展示可选的激励视频广告。玩游戏从不需要观看广告。为了投放和衡量这些广告，AdMob 可能会收集你设备的广告标识符、IP 地址以及广告互动数据等信息。</p>\n    <p>在使用该标识符之前，Kana Pop 会通过 Apple 的“App 跟踪透明度”提示征求你的许可。拒绝不会影响游戏或广告的使用，只会限制广告的个性化程度。</p>\n    <p>关于 Google 收集哪些信息以及如何使用，请参阅 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隐私权政策</a>以及 <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google 如何使用来自使用其服务的应用的信息</a>。</p>\n\n    <h2>儿童隐私</h2>\n    <p>Kana Pop 自身的代码不会收集任何人的个人信息，包括 13 岁以下的儿童。应用中展示的广告由 Google AdMob 提供；只有在玩家通过“App 跟踪透明度”提示明确许可后，才会启用广告个性化。</p>\n\n    <h2>本政策的变更</h2>\n    <p>如果我们更新本隐私政策，修订后的版本将发布在本页面，并更新生效日期。</p>\n\n    <h2>联系我们</h2>\n    <p>对本政策有疑问或顾虑？</p>\n    <a class="contact-pill" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>'
+  },
+  'zh-Hant': {
+    pageTitle: 'Kana Pop 隱私權政策',
+    title: '隱私權政策',
+    date: '生效日期：2026 年 9 月 3 日',
+    policy: '    <p class="note">本譯文僅供參考。如與英文版本有出入，以英文版本為準。</p>\n\n    <h2>概述</h2>\n    <p>Kana Pop 是一款日文假名學習遊戲。我們重視你的隱私。本政策說明 Kana Pop 會收集哪些資料，以及這些資料如何被使用。</p>\n\n    <h2>資料收集</h2>\n    <p>Kana Pop 本身的程式碼<strong>不</strong>收集任何個人資料。具體來說：</p>\n    <ul>\n      <li>無須註冊或登入帳號。</li>\n      <li>不會索取或收集任何個人資訊（姓名、電子郵件等）。</li>\n      <li>應用程式本身不進行任何使用情形分析或追蹤。</li>\n      <li>你的遊戲進度、統計資料和設定只儲存在你的裝置上，絕不會傳送給我們。</li>\n    </ul>\n    <p>Kana Pop 提供可選的獎勵廣告：觀看一則廣告即可獲得額外一條命或一次提示。這些廣告由 Google AdMob 提供，AdMob 可能會自行收集和處理與廣告相關的資料。詳情請見下方的<strong>第三方服務</strong>。</p>\n\n    <h2>儲存在你裝置上的資料</h2>\n    <p>Kana Pop 使用標準的 iOS 儲存空間，將你的遊戲進度和偏好設定（如語言設定和聲音設定）儲存在你的裝置本機。這些資料不會離開你的裝置，我們也無法存取。</p>\n\n    <h2>第三方服務</h2>\n    <p>Kana Pop 使用 <strong>Google AdMob</strong> 顯示可選的獎勵影片廣告。玩遊戲從不需要觀看廣告。為了投放和評估這些廣告，AdMob 可能會收集你裝置的廣告識別碼、IP 位址以及廣告互動資料等資訊。</p>\n    <p>在使用該識別碼之前，Kana Pop 會透過 Apple 的「App 追蹤透明度」提示徵求你的許可。拒絕不會影響遊戲或廣告的使用，只會限制廣告的個人化程度。</p>\n    <p>關於 Google 收集哪些資訊以及如何使用，請參閱 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隱私權政策</a>以及 <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google 如何使用來自使用其服務之應用程式的資訊</a>。</p>\n\n    <h2>兒童隱私</h2>\n    <p>Kana Pop 本身的程式碼不會收集任何人的個人資訊，包括 13 歲以下的兒童。應用程式中顯示的廣告由 Google AdMob 提供；只有在玩家透過「App 追蹤透明度」提示明確許可後，才會啟用廣告個人化。</p>\n\n    <h2>本政策的變更</h2>\n    <p>如果我們更新本隱私權政策，修訂後的版本將發布在本頁面，並更新生效日期。</p>\n\n    <h2>聯絡我們</h2>\n    <p>對本政策有疑問或疑慮？</p>\n    <a class="contact-pill" href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>'
+  }
+};
+</script>
+<script src="lang.js"></script>
 </body>
 </html>

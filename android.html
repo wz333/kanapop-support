@@ -165,52 +165,13 @@
     font-size: 0.85rem;
   }
 
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .topbar .back-link { margin-bottom: 0; }
-
-  /* Language switch: one printed pill, the chosen segment in pink. Each
-     language is named in itself, as in the app's own picker. */
-  .lang {
-    display: inline-flex;
-    border: 2.5px solid var(--ink);
-    border-radius: 999px;
-    overflow: hidden;
-    background: var(--card-paper);
-    flex-shrink: 0;
-  }
-  .lang button {
-    font: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink);
-    background: transparent;
-    border: none;
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-  }
-  .lang button + button { border-left: 2px solid var(--ink); }
-  .lang button[aria-pressed="true"] {
-    background: var(--pink);
-    color: var(--on-bright);
-  }
-
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
   <div class="topbar">
     <a class="back-link" href="index.html" data-i18n="back">&larr; Back</a>
-    <div class="lang" role="group" aria-label="Language" id="lang">
-      <button type="button" lang="en" data-lang="en">EN</button>
-      <button type="button" lang="zh-Hans" data-lang="zh-Hans">简体</button>
-      <button type="button" lang="zh-Hant" data-lang="zh-Hant">繁體</button>
-    </div>
+    <div data-lang-switch></div>
   </div>
 
   <div class="header">
@@ -262,116 +223,76 @@
   </div>
 
 <script>
-(function () {
-  var EMAIL = '<a href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>';
-  var STRINGS = {
+window.KP_STRINGS = {
     'en': {
       pageTitle: 'KanaPop for Android',
-      back: '\u2190 Back',
       title: 'KanaPop for Android',
       subtitle: 'The app as an APK, for phones without Google Play',
       version: 'Version {v}',
       meta: '{date} \u00b7 {size} \u00b7 Android 8.0 or later',
       download: 'Download APK {v}',
       emptyTitle: 'No Android build posted yet',
-      emptyBody: 'Check back soon, or write to ' + EMAIL + '.',
+      emptyBody: 'Check back soon, or write to <a href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>.',
       installTitle: 'Installing',
       step1: 'Tap <strong>Download APK</strong> on your Android phone.',
       step2: 'Open the downloaded file. If Android asks, allow your browser to install unknown apps.',
       step3: 'Tap <strong>Install</strong>, then open KanaPop.',
-      coffeeTitle: 'Buy me a coffee',
-      coffeeBody: 'KanaPop is free. If it helped you learn some kana and you feel like saying thanks, a coffee would make my day <3',
-      coffeeLink: 'Buy me a coffee \u2192',
-      olderTitle: 'Earlier versions',
-      language: 'Language'
+      olderTitle: 'Earlier versions'
     },
     'zh-Hans': {
       pageTitle: 'Kana Pop Android 版',
-      back: '\u2190 返回',
       title: 'Kana Pop Android 版',
       subtitle: 'APK 安装包，适用于没有 Google Play 的手机',
       version: '版本 {v}',
       meta: '{date} \u00b7 {size} \u00b7 需要 Android 8.0 或更高版本',
       download: '下载 APK {v}',
       emptyTitle: '暂未发布 Android 版本',
-      emptyBody: '请稍后再来，或发邮件至 ' + EMAIL + '。',
+      emptyBody: '请稍后再来，或发邮件至 <a href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>。',
       installTitle: '安装方法',
       step1: '在 Android 手机上点按<strong>下载 APK</strong>。',
       step2: '打开下载的文件。如果系统提示，请允许浏览器安装未知应用。',
       step3: '点按<strong>安装</strong>，然后打开 Kana Pop。',
-      coffeeTitle: '请我喝杯咖啡',
-      coffeeBody: 'Kana Pop 完全免费。如果它帮你记住了一些假名，想表示感谢的话，一杯咖啡会让我开心一整天 <3',
-      coffeeLink: '请我喝杯咖啡 \u2192',
-      olderTitle: '历史版本',
-      language: '语言'
+      olderTitle: '历史版本'
     },
     'zh-Hant': {
       pageTitle: 'Kana Pop Android 版',
-      back: '\u2190 返回',
       title: 'Kana Pop Android 版',
       subtitle: 'APK 安裝檔，適用於沒有 Google Play 的手機',
       version: '版本 {v}',
       meta: '{date} \u00b7 {size} \u00b7 需要 Android 8.0 或以上版本',
       download: '下載 APK {v}',
       emptyTitle: '尚未發佈 Android 版本',
-      emptyBody: '請稍後再來，或寄信至 ' + EMAIL + '。',
+      emptyBody: '請稍後再來，或寄信至 <a href="mailto:echoooh.support@gmail.com">echoooh.support@gmail.com</a>。',
       installTitle: '安裝方式',
       step1: '在 Android 手機上點按<strong>下載 APK</strong>。',
       step2: '開啟下載的檔案。如果系統提示，請允許瀏覽器安裝未知應用程式。',
       step3: '點按<strong>安裝</strong>，然後開啟 Kana Pop。',
-      coffeeTitle: '請我喝杯咖啡',
-      coffeeBody: 'Kana Pop 完全免費。如果它幫你記住了一些假名，想表示感謝的話，一杯咖啡會讓我開心一整天 <3',
-      coffeeLink: '請我喝杯咖啡 \u2192',
-      olderTitle: '歷史版本',
-      language: '語言'
+      olderTitle: '歷史版本'
     }
   };
-  var STORE_KEY = 'kanapop.lang';
+</script>
+<script src="lang.js"></script>
+<script>
+(function () {
   var releases = null;
-
-  // ?lang= wins, then the visitor's earlier pick, then the browser.
-  // Chinese splits on script, not region: Hong Kong, Macau and Taiwan
-  // read traditional.
-  function initialLang() {
-    var param = new URLSearchParams(location.search).get('lang');
-    if (STRINGS[param]) return param;
-    try {
-      var saved = localStorage.getItem(STORE_KEY);
-      if (STRINGS[saved]) return saved;
-    } catch (e) {}
-    var prefs = navigator.languages || [navigator.language || 'en'];
-    for (var i = 0; i < prefs.length; i++) {
-      var tag = (prefs[i] || '').toLowerCase();
-      if (tag.indexOf('zh') !== 0) { if (tag.indexOf('en') === 0) return 'en'; continue; }
-      if (/hant|-tw|-hk|-mo/.test(tag)) return 'zh-Hant';
-      return 'zh-Hans';
-    }
-    return 'en';
-  }
-
-  var lang = initialLang();
-  function t(key, vars) {
-    var text = STRINGS[lang][key];
-    for (var k in (vars || {})) text = text.replace('{' + k + '}', vars[k]);
-    return text;
-  }
   function size(bytes) { return (bytes / 1048576).toFixed(1) + ' MB'; }
   function day(iso) {
     var d = new Date(iso + 'T00:00:00');
-    return d.toLocaleDateString(lang, { year: 'numeric', month: 'short', day: 'numeric' });
+    return d.toLocaleDateString(KP.lang, { year: 'numeric', month: 'short', day: 'numeric' });
   }
   function show(id) { document.getElementById(id).hidden = false; }
 
-  function renderReleases() {
+  // Filled in from android/releases.json; see tools/publish-android.sh.
+  function render() {
     if (!releases) return;
     if (!releases.length) { show('empty'); return; }
     var latest = releases[0];
-    document.getElementById('latest-title').textContent = t('version', { v: latest.versionName });
+    document.getElementById('latest-title').textContent = KP.t('version', { v: latest.versionName });
     document.getElementById('latest-meta').textContent =
-      t('meta', { date: day(latest.date), size: size(latest.sizeBytes) });
+      KP.t('meta', { date: day(latest.date), size: size(latest.sizeBytes) });
     var link = document.getElementById('latest-link');
     link.href = latest.url;
-    link.textContent = t('download', { v: latest.versionName });
+    link.textContent = KP.t('download', { v: latest.versionName });
     show('latest');
 
     var list = document.getElementById('older');
@@ -380,7 +301,7 @@
       var li = document.createElement('li');
       var a = document.createElement('a');
       a.href = r.url;
-      a.textContent = t('version', { v: r.versionName });
+      a.textContent = KP.t('version', { v: r.versionName });
       var meta = document.createElement('span');
       meta.className = 'meta';
       meta.textContent = day(r.date) + ' \u00b7 ' + size(r.sizeBytes);
@@ -391,42 +312,11 @@
     if (releases.length > 1) show('older-block');
   }
 
-  function render() {
-    document.documentElement.lang = lang;
-    document.title = t('pageTitle');
-    document.getElementById('lang').setAttribute('aria-label', t('language'));
-    document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      el.textContent = t(el.getAttribute('data-i18n'));
-    });
-    // Only this page's own strings go in as HTML; nothing from the data file.
-    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      el.innerHTML = t(el.getAttribute('data-i18n-html'));
-    });
-    document.querySelectorAll('#lang button').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
-    });
-    renderReleases();
-  }
-
-  document.querySelectorAll('#lang button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      lang = b.getAttribute('data-lang');
-      try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
-      // A ?lang= link follows the switch, or a reload would undo it.
-      var url = new URL(location.href);
-      if (url.searchParams.has('lang')) {
-        url.searchParams.set('lang', lang);
-        history.replaceState(null, '', url);
-      }
-      render();
-    });
-  });
-
-  render();
+  KP.onChange(render);
   fetch('android/releases.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
-    .then(function (data) { releases = data.releases || []; renderReleases(); })
-    .catch(function () { releases = []; renderReleases(); });
+    .then(function (data) { releases = data.releases || []; render(); })
+    .catch(function () { releases = []; render(); });
 })();
 </script>
 </body>
