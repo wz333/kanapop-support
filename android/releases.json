@@ -8,6 +8,14 @@
       "sizeBytes": 4710524,
       "sha256": "29b4b2ee8141dc386179fb81fa4277b2e07ef770d597558a52d6a8e0ad890d8d",
       "url": "https://github.com/wz333/kanapop-support/releases/download/android-v1.5/KanaPop-1.5.apk"
+    },
+    {
+      "versionName": "1.4",
+      "versionCode": 9,
+      "date": "2026-10-16",
+      "sizeBytes": 4874364,
+      "sha256": "59cd8b8ba612d09d89af9690d78fda388c3c297dc54527ad44f006aa9d6cdd85",
+      "url": "https://github.com/wz333/kanapop-support/releases/download/android-v1.4/KanaPop-1.4.apk"
     }
   ]
 }
