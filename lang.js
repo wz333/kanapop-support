@@ -1,17 +1,18 @@
-// The site's language switch: English, simplified and traditional Chinese.
+// The site's language switch: English, simplified and traditional Chinese,
+// Korean and Japanese.
 //
-// A page sets window.KP_STRINGS = { en: {...}, 'zh-Hans': {...}, 'zh-Hant':
-// {...} } before loading this, marks text with data-i18n="key" (text) or
-// data-i18n-html="key" (its own markup only, never data from elsewhere), and
-// puts an empty <div data-lang-switch></div> where the switch goes. Strings
-// every page shares are below; a page's own win.
+// A page sets window.KP_STRINGS = { en: {...}, 'zh-Hans': {...}, ... } before
+// loading this, marks text with data-i18n="key" (text) or data-i18n-html="key"
+// (its own markup only, never data from elsewhere), and puts an empty
+// <div data-lang-switch></div> where the switch goes. Strings every page
+// shares are below; a page's own win.
 //
 // The choice carries from page to page through localStorage. Where storage
 // is unavailable (some private modes), it rides along as ?lang= on the
 // site's own links instead.
 (function () {
-  var LANGS = ['en', 'zh-Hans', 'zh-Hant'];
-  var LABELS = { 'en': 'EN', 'zh-Hans': '简体', 'zh-Hant': '繁體' };
+  var LANGS = ['en', 'zh-Hans', 'zh-Hant', 'ko', 'ja'];
+  var LABELS = { 'en': 'EN', 'zh-Hans': '简体', 'zh-Hant': '繁體', 'ko': '한국어', 'ja': '日本語' };
   var STORE_KEY = 'kanapop.lang';
   var COMMON = {
     'en': {
@@ -34,6 +35,20 @@
       coffeeTitle: '請我喝杯咖啡',
       coffeeBody: 'Kana Pop 完全免費。如果它幫你記住了一些假名，想表示感謝的話，一杯咖啡會讓我開心一整天 <3',
       coffeeLink: '請我喝杯咖啡 →'
+    },
+    'ko': {
+      back: '← 뒤로',
+      language: '언어',
+      coffeeTitle: '커피 한 잔 사 주기',
+      coffeeBody: 'Kana Pop은 무료입니다. 가나를 익히는 데 도움이 되었고 고마운 마음을 전하고 싶다면, 커피 한 잔이 큰 힘이 됩니다 <3',
+      coffeeLink: '커피 한 잔 사 주기 →'
+    },
+    'ja': {
+      back: '← 戻る',
+      language: '言語',
+      coffeeTitle: 'コーヒーをおごる',
+      coffeeBody: 'Kana Pop は無料です。かなを覚えるのに役立って、お礼を伝えたいと思ったら、コーヒー1杯でとても励みになります <3',
+      coffeeLink: 'コーヒーをおごる →'
     }
   };
   var page = window.KP_STRINGS || {};
@@ -59,6 +74,8 @@
     for (var i = 0; i < prefs.length; i++) {
       var tag = (prefs[i] || '').toLowerCase();
       if (tag.indexOf('zh') === 0) return /hant|-tw|-hk|-mo/.test(tag) ? 'zh-Hant' : 'zh-Hans';
+      if (tag.indexOf('ko') === 0) return 'ko';
+      if (tag.indexOf('ja') === 0) return 'ja';
       if (tag.indexOf('en') === 0) return 'en';
     }
     return 'en';
@@ -122,13 +139,17 @@
 
   var style = document.createElement('style');
   style.textContent = [
-    '.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }',
-    '.topbar .back-link { margin-bottom: 0; }',
+    '.topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1rem; margin-bottom: 1.5rem; }',
+    '.topbar .back-link { margin-bottom: 0; white-space: nowrap; }',
     '.topbar.end { justify-content: flex-end; }',
     '.lang { display: inline-flex; border: 2.5px solid var(--ink); border-radius: 999px; overflow: hidden; background: var(--card-paper); flex-shrink: 0; }',
     '.lang button { font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: transparent; border: none; padding: 0.3rem 0.8rem; cursor: pointer; }',
     '.lang button + button { border-left: 2px solid var(--ink); }',
-    '.lang button[aria-pressed="true"] { background: var(--pink); color: var(--on-bright); }'
+    '.lang button[aria-pressed="true"] { background: var(--pink); color: var(--on-bright); }',
+    // Five languages beside a back link overflow a phone's width at the
+    // roomier padding, and the back link wraps to two lines.
+    '@media (max-width: 400px) { .lang button { padding: 0.3rem 0.55rem; } }',
+    '@media (max-width: 350px) { .lang button { padding: 0.3rem 0.4rem; font-size: 0.8rem; } }'
   ].join('\n');
   document.head.appendChild(style);
 
