@@ -13,8 +13,15 @@
 # with it cannot update, or be updated by, the copy Play installs without an
 # uninstall that wipes the player's progress. The script refuses one.
 #
-# It creates the GitHub release android-v<versionName> with the APK as
-# KanaPop-<versionName>.apk, prepends the version to android/releases.json,
+# It also refuses an APK carrying Play's automatic protection (the installer
+# check, Google's com.pairip licence check). Play adds it to the builds it
+# delivers while protection is on, the universal APK included, and such an
+# APK will not open on a phone without Google Play — exactly the phone this
+# page is for. Protection is off for Kana Pop since 1.5 (13); a version
+# uploaded while it was on cannot be published here.
+#
+# It creates the GitHub release android-v<versionName>-<versionCode> with the
+# APK as KanaPop-<versionName>.apk, adds the version to android/releases.json,
 # and commits and pushes that, which republishes the page.
 set -euo pipefail
 
@@ -50,6 +57,17 @@ if [[ $cert == "$UPLOAD_CERT" ]]; then
   exit 1
 fi
 
+# Into a variable first: with pipefail, grep -q closing the pipe early would
+# fail aapt2 and make the test false.
+manifest=$("$tools/aapt2" dump xmltree --file AndroidManifest.xml "$apk")
+if grep -q -i -e 'com\.pairip' -e 'com\.android\.vending\.CHECK_LICENSE' <<<"$manifest"; then
+  echo "This APK carries Google Play's installer check, so it will not open on a" >&2
+  echo "phone without Google Play. Turn off automatic protection in Play Console" >&2
+  echo "(Protected with Play → Automatic protection settings → Installer check)," >&2
+  echo "upload a new version, and download that version's universal APK." >&2
+  exit 1
+fi
+
 known=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["signingCertSha256"] or "")' "$data")
 if [[ -z $known ]]; then
   echo "First publish: every later APK must carry this signing certificate."
@@ -68,7 +86,9 @@ if python3 -c 'import json,sys; sys.exit(0 if any(r["versionCode"]==int(sys.argv
   exit 1
 fi
 
-tag=android-v$version_name
+# The code as well as the name: one name can ship more than once (1.5 went
+# out as 11 with the installer check, then as 13 without).
+tag=android-v$version_name-$version_code
 asset=KanaPop-$version_name.apk
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
