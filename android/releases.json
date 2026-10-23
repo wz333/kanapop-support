@@ -3,6 +3,14 @@
   "releases": [
     {
       "versionName": "1.5",
+      "versionCode": 13,
+      "date": "2026-10-22",
+      "sizeBytes": 4743292,
+      "sha256": "153c83069007609a8a096ad19e78b268cac1ba01b6814392a7aea678edfae78a",
+      "url": "https://github.com/wz333/kanapop-support/releases/download/android-v1.5-13/KanaPop-1.5.apk"
+    },
+    {
+      "versionName": "1.5",
       "versionCode": 11,
       "date": "2026-10-22",
       "sizeBytes": 4710524,
